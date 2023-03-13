@@ -32,4 +32,6 @@ bot.on('message', async (ctx) => {
   ctx.reply('commant not found 😞')
 })
 
+console.log('server is running ...')
+
 bot.launch()
