@@ -5,16 +5,15 @@ const fs = require('fs');
 const { createWorker } = require('tesseract.js')
 
 const token = '6237833521:AAEXf2LY3SAS28_nadeQVezQeA8TIw0Pvuc';
-// const bot = new Telegraf('6237833521:AAEXf2LY3SAS28_nadeQVezQeA8TIw0Pvuc');
 const bot = new Telegraf(token);
 async function renderImgToText(){
   const worker = await createWorker();
-
   await worker.loadLanguage('eng');
   await worker.initialize('eng');
   const { data: { text } } = await worker.recognize('./image.png');
   await worker.terminate();
   fs.unlink('./image.png', (err)=>err && console.log(err))
+  return text;
 }
 bot.on('photo', async (ctx) => {
   ctx.reply('Request is being done...')
